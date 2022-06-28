@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{>headlinks}}
+    <title>Profile</title>
+    <style>
+        textarea,
+        input:focus {
+            outline: none;
+        }
+
+        /* Hiding the number btn*/
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+
+<body>
+    {{#if user}}
+    {{>userheader}}
+    {{/if}}
+
+    {{#if admin}}
+    {{>adminheader}}
+    {{/if}}
+
+    <div class="container text-center">
+        {{#if updmsg}}
+        <div class="alert alert-success alert-dismissible my-3">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Success!</strong> Your Profile Updated.
+        </div>
+        {{/if}}
+        <form action="/profilechanges" method="post">
+
+            <div class="card my-4 text-center mx-auto p-3"
+                style="max-width: 400px;color: aliceblue;background-color: #ff7f50;border-radius: 20px;box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.826);">
+                <h3 class="my-3" style="color: aliceblue;">My Profile</h3>
+
+                {{#each results}}
+                <div class="row mx-auto my-2">
+                    <div class="row m-2"
+                        style="background-color: #ECD5BB;color: black;border-radius: 20px;width: 240px;">
+                        <i class="fas fa-user my-auto col-xl-2 col-md-2 col-sm-2 col-2" style="font-size: 20px;"></i>
+                        <input name="username" required type="text" value={{this.user_name}}
+                            class="form-input text-center my-3 col-xl-10 col-md-10 col-sm-8 col-8"
+                            style="background-color: #ECD5BB;border: none;" />
+                    </div>
+                </div>
+                <div class="row mx-auto my-2">
+                    <div class="row m-2"
+                        style="background-color: #ECD5BB;color: black;border-radius: 20px;width: 240px;">
+                        <i class="fas fa-envelope my-auto col-xl-2 col-md-2 col-sm-2 col-2"
+                            style="font-size: 20px;"></i>
+                        <input name="useremail" required type="email" value={{this.user_email}}
+                            class="form-input text-center my-3 col-xl-10 col-md-10 col-sm-8 col-8"
+                            style="background-color: #ECD5BB;border: none;" />
+                    </div>
+                </div>
+                <div class="row mx-auto my-2">
+                    <div class="row m-2"
+                        style="background-color: #ECD5BB;color: black;border-radius: 20px;width: 240px;">
+                        <i class="fas fa-map-marker-alt my-auto col-xl-2 col-md-2 col-sm-2 col-2"
+                            style="font-size: 20px;"></i>
+                        <textarea name="useraddress" required
+                            class=" text-center my-3 col-xl-10 col-md-10 col-sm-8 col-8 form-input"
+                            style="background-color: #ECD5BB;border: none;">{{this.user_address}}</textarea>
+                    </div>
+                </div>
+                <div class="row mx-auto my-2">
+                    <div class="row m-2"
+                        style="background-color: #ECD5BB;color: black;border-radius: 20px;width: 240px;">
+                        <i class="fas fa-phone my-auto col-xl-2 col-md-2 col-sm-2 col-2" style="font-size: 20px;"></i>
+                        <input id="blah" name="userphone" required type="number" value={{this.user_phone}}
+                            class="form-input text-center my-3 col-xl-10 col-md-10 col-sm-8 col-8"
+                            style="background-color: #ECD5BB;border: none;" />
+                    </div>
+                </div>
+
+                <div class="row mx-auto my-2">
+                    <button type="submit" class="btn m-3"
+                        style="background-color: #ECD5BB;color: black;border-radius: 20px;width: 240px;">Save
+                        Changes</button>
+                </div>
+
+                {{/each}}
+            </div>
+
+    </div>
+    </form>
+    {{>footlinks}}
+</body>
+
+</html>

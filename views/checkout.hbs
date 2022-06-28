@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{>headlinks}}
+    <title>Checkout</title>
+</head>
+
+<body>
+    {{>userheader}}
+    <div class="container">
+        <h3 class="text-center my-3" style="color: #ff7f50;">Checkout Page</h3>
+
+        <div class="my-2 p-3 mx-auto" style="border: 1px solid black;max-width: 400px;border-radius: 20px;">
+            <h4 class="text-center" style="margin-bottom: 20px;color: #ff7f50;">Deliver to:</h4>
+            <Strong>
+                <h5><i class="fas fa-user" style="color: #ff7f50;"></i> {{username}}</h5>
+            </Strong>
+            <p><i class="fas fa-map-marker-alt" style="color: #ff7f50;"></i> {{address}}</p>
+            <p><i class="fas fa-phone-alt" style="color: #ff7f50;"></i> {{phone}}</p>
+            <h5>Total Items: {{totitems}}</h5>
+            <h5>Total Amount Payable: <i class="fas fa-rupee-sign"></i>{{totprice}}</h5>
+
+            <h4 class="text-center my-4" style="color: #ff7f50;">Choose Payment Type</h4>
+            <div class="p-1">
+                <i class="fas fa-money-bill-wave-alt" style="color: #ff7f50;"></i> Cash on Delivery <input type="radio"
+                    checked name="paymenttype">
+            </div>
+
+
+            <div class="p-1">
+                <i class="far fa-credit-card" style="color: #ff7f50;"></i> Online Payment <input type="radio"
+                    name="paymenttype">
+            </div>
+
+            <form action="/order" method="post">
+                <div class="text-center p-2">
+                    <input type="text" value={{userid}} hidden name="userid">
+                    <input type="text" value={{totitems}} hidden name="totitem">
+                    <input type="text" value={{totprice}} hidden name="totprice">
+
+                    <button class="btn" style="background-color: #ff7f50;color: aliceblue;">Place Order</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {{>footlinks}}
+</body>
+
+</html>

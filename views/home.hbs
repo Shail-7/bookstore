@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{>headlinks}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Book Store</title>
+
+    <style>
+        @font-face {
+            font-family: myFirstFont;
+            src: url(/Stoke-Regular.ttf);
+        }
+
+        * {
+            font-family: myFirstFont;
+        }
+
+
+        input:focus {
+            outline: none;
+        }
+
+        input {
+            border: none;
+        }
+
+        .zoom {
+            transition: transform .2s;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+        }
+
+        .zoom:hover {
+            -ms-transform: scale(1.2);
+            /* IE 9 */
+            -webkit-transform: scale(1.2);
+            /* Safari 3-8 */
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+
+<body>
+    {{>header}}
+
+    {{!-- Search box --}}
+    <div class="container text-center my-3" data-aos="fade-in">
+        <form action="/search">
+            <input name="user" type="text" hidden value="home">
+            <input id="searchbox" name="searchbox" autocomplete="off" class="mr-sm-2" type="search"
+                placeholder="title,author,genre,ISBN..." aria-label="Search" style="box-shadow: none;">
+            <button class="btn my-2 my-sm-0" style="background-color: #FF7F50;" type="submit"><i class="fa fa-search"
+                    style="color:aliceblue;" aria-hidden="true"></i>
+            </button>
+        </form>
+    </div>
+
+    {{!-- Book Cards --}}
+
+    <div class="container-fluid">
+        <div class="row">
+            {{#each results}}
+            <a href="/bookdetails?bid={{this.books_id}}&usertype=home" class=""
+                style="color:black; text-decoration: none;">
+                <div data-aos="flip-left" class="card my-2 col-xl-3 col-md-3 col-sm-12 col-12 border-0"
+                    style="max-width: 16rem;margin: 40px;">
+                    <img style="height: 307px;width: 210px;box-shadow: 8px 8px 5px rgba(0, 0, 0, 0.826);"
+                        src={{this.books_cover}} class="zoom img-fluid card-img-top" alt="Book Cover">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{this.books_title}}</h5>
+                        <p class="card-text">{{this.books_author}}</p>
+                        <p class="card-text"><i class="fas fa-rupee-sign"></i> {{this.books_price}}</p>
+                        {{!-- <a href="/bookdetails" class="btn" style="background-color:#FF7F50;color: aliceblue;">View
+                            Details</a> --}}
+                    </div>
+                </div>
+            </a>
+            {{/each}}
+        </div>
+    </div>
+
+    {{#if noresults}}
+    <div class="container text-center">
+        <h3 class="" style="color: #ff7f50;">No Data Found!</h3>
+    </div>
+    {{/if}}
+
+    {{#if backHome}}
+    <div class="container text-center">
+        <a href="/"><button class="btn mb-2" style="background-color: #ff7f50;color: aliceblue;">Back Home</button></a>
+    </div>
+    {{/if}}
+    {{!--
+    <script src="/public/client.js"></script> --}}
+    {{>footlinks}}
+
+</body>
+
+</html>

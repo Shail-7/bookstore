@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{>headlinks}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Order Details</title>
+</head>
+
+<body>
+    {{>userheader}}
+    <div class="container">
+        {{#if msg}}
+        <h3 class="text-center my-5"> Order Details not Found!</h3>
+
+        {{else}}
+        <div class="container">
+            <a href="/myorders" class="btn my-3" style="background-color: #ff7f50;color: aliceblue;border: none;">All
+                Orders</a>
+            <div class="card my-4 mx-auto p-2 text-center" style="">
+                <h3 class="my-3" style="color: #ff7f50;">Order Items</h3>
+                {{#each results}}
+                <div class="row p-2">
+                    <div class="col-xl-4 col-md-4 col-sm-12 col-12">
+                        <img src={{this.books_cover}} class="img-fluid m-2"
+                            style="height: 120px;box-shadow: 8px 8px 5px black;" alt="book image">
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-12 col-12">
+                        <h5>{{this.books_title}}</h5>
+                        <p>{{this.books_author}}</p>
+                        <p><i class="fas fa-rupee-sign"></i>{{this.books_price}} x {{this.order_book_qty}}</p>
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-12 col-12">
+                        <h4 style="color: #ff7f50;"> <i class="fas fa-rupee-sign"></i>{{multiply this.order_book_qty
+                            this.books_price}}</h4>
+                    </div>
+
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        {{/if}}
+
+    </div>
+
+    {{>footlinks}}
+</body>
+
+</html>

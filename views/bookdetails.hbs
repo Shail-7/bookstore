@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    {{>headlinks}}
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <title>Book Details</title>
+
+</head>
+<style>
+    #tooltiptxt {
+        width: 120px;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+
+        /* Position the tooltip */
+
+
+    }
+</style>
+
+
+
+<body>
+
+    {{!-- {{#ifvalue userType value="hero"}} --}}
+    {{!-- {{#if userType='home'}} --}}
+    {{#if home}}
+    {{>header}}
+    {{/if}}
+
+    {{#if user}}
+    {{>userheader}}
+    {{/if}}
+
+    {{#if admin}}
+    {{>adminheader}}
+    {{/if}}
+
+    {{!-- {{/ifvalue}} --}}
+    <div class="container mt-4">
+        {{#if user}}
+        <div id="favtool" class="text-right">
+            {{!-- /addfav?bid={{bid}} --}}
+            <a href="/addfav?bid={{bid}}" class="btn" style="">
+                {{!-- Add to Favourites <i id="star" class="far fa-star my-2" style="font-size: 25px;"></i> --}}
+                {{#if favmsgt}}
+                Added to Favourites <i id="star" class="fas fa-star my-2" style="font-size: 25px;color: gold;"></i>
+                {{/if}}
+                {{#if favmsgf}}
+                Add to Favourites <i id="star" class="far fa-star my-2" style="font-size: 25px;"></i>
+                {{/if}}
+            </a>
+        </div>
+        {{/if}}
+        <div class="row">
+
+            {{#each results}}
+            <div class="col-xl-4 col-md-4 col-sm-12 col-12 text-center my-3">
+                <img data-aos="zoom-in-down" class="img-fluid my-5"
+                    style="height: 400px; width: 300px;box-shadow: 8px 8px 5px rgba(0, 0, 0, 0.826)"
+                    src={{this.books_cover}} alt="Book Cover">
+            </div>
+            <div class="col-xl-8 col-md-8 col-sm-12 col-12 my-3">
+
+
+
+                <section data-aos="zoom-in-down"
+                    style="border: 1px solid black;border-radius: 20px;text-align:left;box-shadow: 8px 8px 5px rgba(0, 0, 0, 0.826);"
+                    class="p-4 mb-3 mt-3">
+                    <h3 class="text-center">{{this.books_title}}</h3>
+                    <hr class="mb-4" style="border: 1px solid black;">
+                    <p><strong>Author</strong>: {{this.books_author}} </p>
+                    <p><strong>Genre</strong>: {{this.books_genre}}</p>
+                    <p><strong>Release Year</strong>: {{this.books_year}}</p>
+                    <p><strong>ISBN</strong>: {{this.books_isbn}}</p>
+                    <p><strong>Pages</strong>: {{this.books_pages}}</p>
+                    <p><strong>Description</strong>: {{this.books_desc}}
+                    </p>
+
+                    <input type="text" hidden id="adminbid" value={{this.books_id}}>
+
+                    <h3 class="badge" style="font-size: 25px;background-color: #FF7F50;color: aliceblue;"><i
+                            class="fas fa-book-open"></i> Price: <i class="fas fa-rupee-sign"></i> {{this.books_price}}
+                    </h3>
+                    <form action="/addtocart">
+                        <input id="bookid" name="bookid" hidden value={{this.books_id}} type="text">
+                        {{/each}}
+
+                        <div class="container text-center mt-3">
+                            {{#if user}}
+                            <input id="usertype" name="usertype" hidden value="user" type="text">
+                            <button type="submit" id="buybtn" class="btn p-2"
+                                style="background-color: #ff7f50;color:aliceblue">Add to
+                                Cart <i class="fas fa-cart-plus"></i></button>
+                            {{/if}}
+                    </form>
+
+                    {{#if home}}
+                    <a class="btn p-2" style="background-color: #ff7f50;color:aliceblue" href="/login">Login
+                        to
+                        Buy <i class="fas fa-shopping-cart"></i></a>
+                    {{/if}}
+                    {{#if admin}}
+                    <button type="button" id="editbook" class="btn p-2 mr-2"
+                        style="background-color: #ff7f50;color:aliceblue">Edit
+                        Book <i class="fas fa-edit"></i></button>
+
+                    {{!-- <a href="#"> <button class="btn p-2" style="background-color: #ff7f50;color:aliceblue">Buy
+                            <i class="fas fa-shopping-cart"></i></button>
+                    </a> --}}
+                    {{/if}}
+
+            </div>
+            </section>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        bid = document.getElementById('adminbid');
+        editbook = document.getElementById('editbook');
+        editbook.addEventListener('click', () => {
+            window.location.href = `/editbook?bid=${bid.value}`;
+        })
+    </script>
+    {{>footlinks}}
+</body>
+
+</html>

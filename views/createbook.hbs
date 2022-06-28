@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{>headlinks}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Create Book</title>
+
+    <style>
+        input,
+        textarea:focus {
+            outline: none;
+        }
+
+        /* Hiding the number btn*/
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+
+<body>
+    {{>adminheader}}
+
+    <div class="container-fluid">
+        <div class="container text-center mt-4">
+            <div class="container m-auto mb-3 card col d-flex justify-content-center"
+                style="width: 40rem;border-radius: 15px;background-color:#FF7F50;box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.826)">
+                <h2 class="text-center mt-2" style="color:white">Create Book</h2>
+                <form method="post" action="/addbook">
+                    <div class="container row">
+
+                        <div class="container col-xl-5 col-md-5 col-sm-12 col-12 my-3 p-2 mx-auto formdiv"
+                            style="width: 15rem;background-color: #ECD5BB;border-color: #ECD5BB;">
+                            <div class="row">
+                                {{!-- <img class="img-fluid col-xl-3 col-md-3 col-sm-3 col-3"
+                                    style="height:25px;width: 5px;"
+                                    src="https://img.icons8.com/ios-filled/25/undefined/book.png" /> --}}
+                                <i class="fas fa-book col-xl-3 col-md-3 col-sm-3 col-3 pt-2"></i>
+
+                                {{!-- <i class="fas fa-book"></i> --}}
+
+                                <input id="booktitle" name="booktitle"
+                                    class="border-0 col-xl-8 col-md-8 col-sm-8 col-8 pt-2" type="text" required
+                                    style="background-color: #ECD5BB;" placeholder="Book Title">
+                            </div>
+                        </div>
+                        <div class="container col-xl-5 col-md-5 col-sm-12 col-12 my-3 p-2 mx-auto"
+                            style="width: 15rem;border: 1px solid;background-color: #ECD5BB;border-color: #ECD5BB;">
+                            <div class="row">
+                                <i class="fa fa-user col-xl-3 col-md-3 col-sm-3 col-3 pt-2" aria-hidden="true"></i>
+                                <input id="bookauthor" name="bookauthor"
+                                    class="border-0  col-xl-8 col-md-8 col-sm-8 col-8 pt-2" type="text" required
+                                    style="background-color: #ECD5BB;" placeholder="Book Author">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="container row">
+                        <div class="container col-xl-5 col-md-5 col-sm-12 col-12 my-3 p-2 mx-auto"
+                            style="width: 15rem;border: 1px solid;background-color: #ECD5BB;border-color: #ECD5BB;">
+
+                            <div class="row">
+                                <i class="fas fa-swatchbook col-xl-3 col-md-3 col-sm-3 col-3  pt-2"
+                                    aria-hidden="true"></i>
+                                <input id="bookgenre" name="bookgenre"
+                                    class="border-0  col-xl-8 col-md-8 col-sm-8 col-8 pt-2" type="text" required
+                                    style="background-color: #ECD5BB;" placeholder="Book Genre">
+                            </div>
+                        </div>
+
+                        <div class="container col-xl-5 col-md-5 col-sm-12 col-12 my-3 p-2 mx-auto"
+                            style="width: 15rem;border: 1px solid;background-color: #ECD5BB;border-color: #ECD5BB;">
+                            <div class="row">
+                                <i class="fa fa-calendar col-xl-3 col-md-3 col-sm-3 col-3  pt-2" aria-hidden="true"></i>
+                                <input id="bookyear" name="bookyear"
+                                    class="border-0 col-xl-8 col-md-8 col-sm-8 col-8 pt-2" type="number" required
+                                    style="background-color: #ECD5BB;" placeholder="Book Release Year">
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="container col-xl-10 col-md-10 col-sm-12 col-12 my-3 p-2 mx-auto"
+                        style="width: 15rem;border: 1px solid;background-color: #ECD5BB;border-color: #ECD5BB;">
+
+                        <i class=" col-md-8 fas fa-pencil-alt mx-2" aria-hidden="true"></i>
+
+                        <textarea id="bookdesc" name="bookdesc" class="border-0" type="text" required
+                            style="background-color: #ECD5BB;max-width:100%;" placeholder="Book Description"
+                            cols="50"></textarea>
+                    </div>
+
+                    <div class="container row">
+
+                        <div class="container col-xl-5 col-md-5 col-sm-12 col-12 my-3 p-2 mx-auto"
+                            style="width: 15rem;border: 1px solid;background-color: #ECD5BB;border-color: #ECD5BB;">
+                            <div class="row">
+                                <i class="fas fa-book-open col-xl-3 col-md-3 col-sm-3 col-3 pt-2"
+                                    aria-hidden="true"></i>
+                                <input id="bookcover" name="bookcover"
+                                    class="border-0 col-xl-8 col-md-8 col-sm-8 col-8 pt-2" type="text" required
+                                    style="background-color: #ECD5BB;" placeholder="Book Cover">
+                            </div>
+                        </div>
+                        <div class="container col-xl-5 col-md-5 col-sm-12 col-12 my-3 p-2 mx-auto"
+                            style="width: 15rem;border: 1px solid;background-color: #ECD5BB;border-color: #ECD5BB;">
+                            <div class="row">
+                                <i class="fas fa-barcode col-xl-3 col-md-3 col-sm-3 col-3 pt-2" aria-hidden="true"></i>
+                                <input id="bookisbn" name="bookisbn"
+                                    class="border-0 col-xl-8 col-md-8 col-sm-8 col-8 pt-2" type="number" required
+                                    style="background-color: #ECD5BB;" placeholder="Book ISBN">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container row">
+                        <div class="container col-xl-5 col-md-5 col-sm-12 col-12 my-3 p-2 mx-auto"
+                            style="width: 15rem;border: 1px solid;background-color: #ECD5BB;border-color: #ECD5BB;">
+                            <div class="row">
+                                <i class="fas fa-file col-xl-3 col-md-3 col-sm-3 col-3 pt-2" aria-hidden="true"></i>
+                                <input id="bookpages" name="bookpages"
+                                    class="border-0 col-xl-8 col-md-8 col-sm-8 col-8 pt-2" type="number" required
+                                    style="background-color: #ECD5BB;" placeholder="Book Pages">
+                            </div>
+                        </div>
+
+
+
+                        <div class="container col-xl-5 col-md-5 col-sm-12 col-12 my-3 p-2 mx-auto"
+                            style="width: 15rem;border: 1px solid;background-color: #ECD5BB;border-color: #ECD5BB;">
+                            <div class="row">
+                                <i class="fas fa-rupee-sign col-xl-3 col-md-3 col-sm-3 col-3 pt-2"></i>
+                                <input id="bookprice" name="bookprice"
+                                    class="border-0 col-xl-8 col-md-8 col-sm-8 col-8 pt-2" type="number" required
+                                    style="background-color: #ECD5BB;" placeholder="Book Price">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container my-4 p-2 mx-auto" style="">
+                        <button type="submit"
+                            style="width: 15rem;height: 3rem;;border: 1px solid;background-color: #ECD5BB;border: none;">Create
+                            Book
+                        </button>
+                    </div>
+                </form>
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+    {{>footlinks}}
+</body>
+
+</html>

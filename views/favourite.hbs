@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{>headlinks}}
+    <title>Favourites</title>
+</head>
+
+<body>
+    {{>userheader}}
+    <div class="container">
+        {{#if msg}}
+        <div class="text-center my-5">
+            <img src="https://img.icons8.com/arcade/200/undefined/experimental-star-arcade.png" class="my-5" />
+            <h3 class="my-auto" style="color: #ff7f50;">No Favourites!</h3>
+        </div>
+        {{else}}
+
+        <h3 class="my-5 text-center" style="color: #ff7f50;">My Favourites</h3>
+        <div class="container">
+            {{#each results}}
+            <a href="/bookdetails?bid={{this.books_id}}&usertype=user" style="text-decoration: none;color: black;">
+                <div data-aos="zoom-in-down" class="card p-3 text-center m-2 my-2"
+                    style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.826);">
+                    {{!-- <div class="row">
+                        <div class="col-xl-4 col-md-4 col-sm-12 col-12">
+                            <img src={{this.books_cover}} style="height: 150px;box-shadow: 8px 8px 5px black;" class=""
+                                alt="book img">
+                        </div>
+                        <div class="bg-danger col-xl-4 col-md-4 col-sm-12 col-12">
+                            <h4 class="">{{this.books_title}}</h4>
+                            <p>{{this.books_author}}</p>
+                            <a class="col-xl-2 col-md-2 col-sm-2 col-2" href="">dfgf</a>
+
+                        </div>
+                        <div class="col-xl-4 col-md-4 col-sm-2 col-2">
+                            <a href="">dsf</a>
+                        </div>
+                    </div> --}}
+                    <div class="row p-1 text-center">
+                        <div class="col-xl-4 col-md-4 col-sm-12 col-12">
+                            <img src={{this.books_cover}} class="img-fluid m-2"
+                                style="height: 120px;box-shadow: 8px 8px 5px black;" alt="book image">
+                        </div>
+                        <div class="col-xl-4 col-md-4 col-sm-12 col-12 mt-4">
+                            {{!-- <div class="row"> --}}
+                                <h5>{{this.books_title}}</h5>
+                                <p>{{this.books_author}}</p>
+                                <p><i class="fas fa-rupee-sign"></i>{{this.books_price}}</p>
+                                {{!--
+                            </div> --}}
+                        </div>
+                        <div class="col-xl-4 col-md-4 col-sm-4 col-4 my-auto mx-auto">
+
+                            <form action="/delfav" method="post">
+                                <input type="text" name="bid" hidden value="{{this.books_id}}">
+                                <div class="">
+                                    <button id="minusbtn" class="btn" type="submit" style="color: red;"> <i
+                                            class="fas fa-minus-circle" style="font-size: 30px;"></i></button>
+                                </div>
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+
+            {{/each}}
+        </div>
+        {{/if}}
+    </div>
+    <script>
+        let minusbtn = document.getElementById('minusbtn');
+        //minusbtn.setAttribute("data-aos", "zoom-out")
+    </script>
+    {{>footlinks}}
+</body>
+
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{>headlinks}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    {{!--
+    <script>
+        Handlebars.registerHelper("add", function (thing1, thing2) {
+            return thing1 * thing2;
+        });
+    </script> --}}
+
+    <title>Cart</title>
+</head>
+
+<body>
+    {{>userheader}}
+    <div class="container">
+        {{#if msg}}
+        <div class="text-center">
+            <img class="my-5" src="https://img.icons8.com/pastel-glyph/300/undefined/shopping-trolley--v1.png"
+                alt="Empty-Cart image">
+            <h3>Your Cart is empty!</h3>
+        </div>
+
+        {{else}}
+
+
+        <div class="container text-center">
+            <h2 class="my-3">Cart Items <i class="fas fa-shopping-cart" style="color: #ff7f50;"></i></h2>
+            <div class="card my-2 mb-3">
+                <div class="container-fluid">
+                    <h6 class="my-2"> Total Items in Cart: {{totalQty}}</h6>
+                    <h5 class="my-1">Total Price: <i class="fas fa-rupee-sign"></i> {{totalPrice}} </h5>
+                    <hr>
+                </div>
+
+                {{#each result}}
+                <div class="row m-3 p-2">
+                    <div class="col-xl-4 col-md-4 col-sm-12 col-12">
+                        <img src={{this.books_cover}} class="img-fluid"
+                            style="height: 150px;box-shadow: 8px 8px 5px black;" alt="book image">
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-10 col-10">
+                        <h4 class="mt-3">{{this.books_title}}</h4>
+                        <h6>{{this.books_author}}</h6>
+                        <div class="row">
+
+                            <a class="mx-auto col-xl-4 col-md-4 col-sm-2 col-2"
+                                href="/minusqty?cartid={{this.cart_id}}">
+                                <i style="color:#ff7f50 ;font-size: 22px;"
+                                    class="mx-auto col-xl-4 col-md-4 col-sm-2 col-2 fas fa-minus p-1"></i>
+                            </a>
+                            <p class="mx-auto col-xl-4 col-md-4 col-sm-7 col-7"><span class="p-1"
+                                    style="background-color: #ff7f50; color: aliceblue;">Qty:
+                                    x{{this.cart_qty}}</span> </p>
+                            <a class="mx-auto col-xl-4 col-md-4 col-sm-2 col-2"
+                                href="/addtocart?bookid={{this.books_id}}">
+                                <i style="color:#ff7f50 ;font-size: 22px;" class="fas fa-plus p-1"></i>
+                            </a>
+                        </div>
+                        <h5 class="m-2 p-2" style="background-color: #ff7f50;color: aliceblue;"><i
+                                class="fas fa-rupee-sign"></i>
+                            {{multiply this.books_price this.cart_qty}}
+                        </h5>
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-2 col-2 my-auto">
+                        <form action="/delcartitem" method="get">
+                            <input hidden type="text" value={{this.cart_id}} name="cartid">
+                            <button class="btn" type="submit" style="border: none;outline: none;">
+                                <i class="fas fa-trash-alt" style="color: red;font-size: 20px;"></i>
+                            </button>
+                        </form>
+
+                    </div>
+                </div>
+                <hr>
+                {{/each}}
+                <div class="container">
+                    <button class="btn my-3" style="background-color: #ff7f50;color: aliceblue;" data-toggle="modal"
+                        data-target="#exampleModal">Checkout</button>
+                </div>
+            </div>
+        </div>
+
+        {{!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Launch demo modal
+        </button> --}}
+
+        <!-- Modal -->
+        <div class="modal fade my-5" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #ff7f50;color: aliceblue;">
+                        <h5 class="modal-title" id="exampleModalLabel">Do you want to Checkout?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" style="color: aliceblue;">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container text-center">
+                            <p> Total Items in <i class="fas fa-shopping-cart" style="color: #ff7f50;"></i>:
+                                {{totalQty}}</p>
+                            <p>Total Price: <i class="fas fa-rupee-sign"></i> {{totalPrice}} </p>
+                        </div>
+                    </div>
+                    {{!-- <form action="/checkout"> --}}
+                        <div class="modal-footer text-center">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                            <a href="/checkout?totitems={{totalQty}}&totprice={{totalPrice}}"> <button type="button"
+                                    class="btn" style="background-color: #ff7f50;color:aliceblue;">Yes</button>
+                            </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        {{!-- {{this.cart_id}} --}}
+
+        {{/if}}
+    </div>
+    {{>footlinks}}
+</body>
+
+</html>
